@@ -52,6 +52,8 @@ public class Movies extends MVCPortlet implements Initializer<Movies> {
 				logger.info("url IMMAGINE: "+url);
 				url = getBaseURLConfigurations(mdb);
 			}
+			
+			//logger.info("film: "+mdb.getMovieInfo(286217, "IT", ""));
 		} catch (MovieDbException e) {
 			logger.error("ERRORE: "+e.getMessage());
 			e.printStackTrace();
@@ -68,6 +70,7 @@ public class Movies extends MVCPortlet implements Initializer<Movies> {
 		// System.out.println(cert.getValue());
 		// }
 		// }
+		renderRequest.setAttribute("mdb", mdb);
 		renderRequest.setAttribute("top20movies", listmovie);
 		renderRequest.setAttribute("newsMovies", newsMovies);
 		renderRequest.setAttribute("url", url+"w154");
@@ -94,10 +97,13 @@ public class Movies extends MVCPortlet implements Initializer<Movies> {
 		logger= LogFactoryUtil.getLog(t.getClass());
 	}
 	
+	
+	
 	public static void main(String ...strings){
 		Movies a = new Movies();
 		try {
 			a.doView(null, null);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
